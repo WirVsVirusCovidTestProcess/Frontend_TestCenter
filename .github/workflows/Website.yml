@@ -7,8 +7,8 @@ name: Install Dependencies, Lint, Build and Test
 on: [push]
 
 env:
-  AZURE_WEBAPP_NAME: covid-testcenter    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'bin/'      # set this to the node version to use
+  AZURE_WEBAPP_NAME: covid-testcenter              # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'bin/'                # set this to the node version to use
   ARTIFACT_NAME: 'web'
 
 jobs:
@@ -38,9 +38,9 @@ jobs:
     - name: Upload Website
       uses: actions/upload-artifact@v1
       with:
-        name: web
+        name: ${{ env.ARTIFACT_NAME }}
         path: www/
-    
+
   release:
     name: Release to Azure WebApp
     needs: test
