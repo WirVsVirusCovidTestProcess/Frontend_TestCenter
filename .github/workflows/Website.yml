@@ -27,14 +27,10 @@ jobs:
         node-version: ${{ matrix.node_version }}
     - name: Install Dependencies
       run: npm install
-    - name: Lint
-      run: npm run lint
+    - name: Install CLI
+      run: npm install -g @ionic/cli
     - name: Build
-      run: npm run build -- --prod
-#    - name: Test
-#      run: npm test -- --configuration=ci
-#    - name: E2E
-#      run: npm run e2e -- --configuration=ci
+      run: npm run build
     - name: Upload Website
       uses: actions/upload-artifact@v1
       with:
