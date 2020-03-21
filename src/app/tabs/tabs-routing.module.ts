@@ -8,46 +8,36 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-          }
-        ]
+        path: 'untriaged-queue',
+        loadChildren: () => import('./untriaged-queue/untriaged-queue.module').then(m => m.UntriagedQueuePageModule)
       },
       {
-        path: 'tab2',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
-        ]
+        path: 'waiting-queue',
+        loadChildren: () => import('./waiting-queue/waiting-queue.module').then(m => m.WaitingQueuePageModule)
       },
       {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-          }
-        ]
+        path: 'lab-queue',
+        loadChildren: () => import('./lab-queue/lab-queue.module').then(m => m.LabQueuePageModule)
+      },
+      {
+        path: 'result-queue',
+        loadChildren: () => import('./result-queue/result-queue.module').then(m => m.ResultQueuePageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/untriaged-queue',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/untriaged-queue',
     pathMatch: 'full'
+  },
+  {
+    path: 'result-queue-dialog',
+    loadChildren: () => import('./result-queue-dialog/result-queue-dialog.module').then( m => m.ResultQueueDialogPageModule)
   }
 ];
 
