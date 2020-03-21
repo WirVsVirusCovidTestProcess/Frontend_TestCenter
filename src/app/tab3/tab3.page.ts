@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User, BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-tab3',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
-  constructor() {}
-
+  public people: User[] = [];
+  constructor(private backendService: BackendService) {}
+  ngOnInit() {
+    this.people = this.backendService.getUntriagedQueue();
+  }
 }
