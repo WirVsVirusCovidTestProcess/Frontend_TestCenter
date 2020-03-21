@@ -24,7 +24,8 @@ const routes: Routes = [
         loadChildren: () => import('./result-queue/result-queue.module').then(m => m.ResultQueuePageModule)
       },
       {
-        path: 'edit'
+        path: 'edit',
+        loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
       },
       {
         path: '',
@@ -37,10 +38,6 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/untriaged-queue',
     pathMatch: 'full'
-  },
-  {
-    path: 'edit',
-    loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
   }
 ];
 

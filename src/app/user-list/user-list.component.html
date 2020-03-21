@@ -3,7 +3,7 @@
     Recent Conversations
   </ion-list-header> -->
 
-  <ion-item *ngFor="let p of people">
+  <ion-item *ngFor="let p of people" button (click)="buttonClick(p)">
     <ion-avatar slot="start">
       <ng-container [ngSwitch]="p.status">
         <svg viewBox="0 0 50 50" *ngSwitchCase="'red'">
@@ -18,9 +18,9 @@
       </ng-container>
     </ion-avatar>
     <ion-label>
-      <h2>{{p.first_name}} {{p.last_name}}</h2>
-      <h3>Score {{p.score}}</h3>
-      <p>Some more personal informations?</p>
+      <h2>{{p.id}}</h2>
+      <h3>PLZ {{p.Location}}</h3>
+      <p>Preferred: {{p.TestcenterAddress}}</p>
     </ion-label>
   </ion-item>
 </ion-list>

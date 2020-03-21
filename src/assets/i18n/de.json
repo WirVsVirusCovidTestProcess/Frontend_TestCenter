@@ -3,6 +3,14 @@
         "untriaged_queue": "Nicht zugeordnet",
         "waiting_queue": "Warteliste",
         "lab_queue": "Labor",
-        "results": "Ergebnisse"
+        "results": "Ergebnisse",
+        "edit": {
+            "test_result": "Test Ergebnis",
+            "title": "Termin bearbeiten"
+        }
+    },
+    "buttons": {
+        "negative": "Negativ",
+        "positive": "Positiv"
     }
 }

@@ -5,13 +5,13 @@ import { EditPage } from './edit.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: EditPage
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class EditPageRoutingModule {}

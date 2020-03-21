@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit</ion-title>
+    <ion-title> {{"tabs.edit.title" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2>{{appointment.id}}</h2>
+  <p></p>
 
+  <ng-container *ngIf="appointment.queue === queue.Untriaged">
+    <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+    <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+    <ion-button>
+      Assign Time
+    </ion-button>
+  </ng-container>
+
+  <ng-container *ngIf="appointment.queue === queue.Waiting">
+    <ion-input placeholder="Tracking Id"></ion-input>
+    <ion-button>
+      Submit Tracking Code
+    </ion-button>
+  </ng-container>
+
+  <ng-container *ngIf="appointment.queue === queue.Lab">
+    <ion-button color="warning">
+      {{"buttons.positive" | translate}}
+    </ion-button>
+
+    <ion-button color="success">
+      {{"buttons.negative" | translate}}
+    </ion-button>
+  </ng-container>
+
+  <ng-container *ngIf="appointment.queue === queue.Result">
+    {{"tabs.edit.test_result" | translate }}: {{appointment.TestResult}}
+  </ng-container>
 </ion-content>

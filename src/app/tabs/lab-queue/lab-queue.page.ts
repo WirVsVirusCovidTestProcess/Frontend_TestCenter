@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, BackendService } from 'src/app/services/backend.service';
+import { User, BackendService, Queue } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-lab-queue',
@@ -10,6 +10,8 @@ export class LabQueuePage implements OnInit {
   public people: User[] = [];
   constructor(private backendService: BackendService) {}
   ngOnInit() {
-    this.people = this.backendService.getUntriagedQueue();
+    this.backendService.getUntriagedQueue().subscribe(p => {
+      this.people = p.filter(p => p.queue === Queue.Lab);
+    });
   }
 }
