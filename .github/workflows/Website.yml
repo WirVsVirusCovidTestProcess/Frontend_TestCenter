@@ -30,7 +30,7 @@ jobs:
     - name: Install CLI
       run: npm install -g @ionic/cli
     - name: Build
-      run: npm run build
+      run: ionic build --prod
     - name: Upload Website
       uses: actions/upload-artifact@v1
       with:
