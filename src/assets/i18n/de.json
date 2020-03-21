@@ -1,0 +1,8 @@
+{
+    "tabs": {
+        "untriaged_queue": "Nicht zugeordnet",
+        "waiting_queue": "Warteliste",
+        "lab_queue": "Labor",
+        "results": "Ergebnisse"
+    }
+}
