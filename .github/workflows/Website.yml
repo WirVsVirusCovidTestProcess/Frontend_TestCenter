@@ -6,6 +6,11 @@ name: Install Dependencies, Lint, Build and Test
 
 on: [push]
 
+env:
+  AZURE_WEBAPP_NAME: covid-testcenter    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'bin/'      # set this to the node version to use
+  ARTIFACT_NAME: 'web'
+
 jobs:
   test:
     name: Test on node ${{ matrix.node_version }}
@@ -35,3 +40,22 @@ jobs:
       with:
         name: web
         path: www/
+    
+  release:
+    name: Release to Azure WebApp
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - run: ls ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
