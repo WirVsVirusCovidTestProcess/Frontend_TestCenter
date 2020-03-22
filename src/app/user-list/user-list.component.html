@@ -17,21 +17,32 @@
         </svg>
       </ng-container>
     </ion-avatar>
+
     <ion-label>
-      <h2>{{p.id}}</h2>
-      <h3>PLZ {{p.Location}}</h3>
-      <p>Preferred: {{p.TestcenterAddress}}</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h2>{{p.id}}</h2>
+          </ion-col>
+          <ion-col>
+            <h3>{{p.location}}</h3>
+          </ion-col>
+          <ion-col>
+            <p>Preferred: {{p.testcenterAddress}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-label>
     <ion-button slot="end" *ngIf="p.queue == queue.Untriaged">
-      Termin Buchen
+      Termin vergeben
     </ion-button>
 
     <ion-button disabled slot="end" *ngIf="p.queue == queue.Waiting">
       {{p.dateToBeInTestcenter}}
     </ion-button>
 
-    <ion-button disabled slot="end" *ngIf="p.queue == queue.Result">
-      {{p.testResult}}
+    <ion-button disabled slot="end" *ngIf="p.queue == queue.Result" [color]="p.result ? 'danger' : 'success'">
+      {{p.testResult ? "POSTIV" : "NEGATIV" }}
     </ion-button>
   </ion-item>
 </ion-list>

@@ -9,7 +9,8 @@ import { Appointment, BackendService, Queue } from 'src/app/services/backend.ser
 export class LabQueuePage implements OnInit {
   public people: Appointment[] = [];
   constructor(private backendService: BackendService) {}
-  ngOnInit() {
+  ngOnInit(): void {}
+  ionViewDidEnter() {
     this.backendService.getAppointmentQueue().subscribe(p => {
       this.people = p.filter(p => p.queue === Queue.Lab);
     });
