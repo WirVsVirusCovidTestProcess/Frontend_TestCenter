@@ -57,6 +57,6 @@ export class EditPage implements OnInit {
   }
 
   back() {
-    this._location.back();
+    this.location.back();
   }
 }
