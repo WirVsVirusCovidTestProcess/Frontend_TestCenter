@@ -21,8 +21,8 @@ export class BackendService {
   }
 
   updateAppointment(updateA: Appointment): Observable<Appointment> {
-    let update = BackendService.appointments.filter(a => a.id == updateA.id)[0];
-    update = updateA;
+    let index = BackendService.appointments.findIndex(a => a.id === updateA.id);
+    BackendService.appointments[index] = updateA;
     return of(updateA);
     // return this.baseGet<BackendAppointment>('/api/AddAnAppointmentDate').pipe(
     //   map(a => this.addAdditionalProperties(a))
@@ -75,7 +75,115 @@ export class BackendService {
       token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
       dateToBeInTestcenter: '17:00',
       testcenterAddress: 'Charite',
+      riskScore: 500,
+      location: '10783'
+    },
+    {
+      id: '1002',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
       riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1003',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 300,
+      location: '10783'
+    },
+    {
+      id: '1004',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1005',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 700,
+      location: '10783'
+    },
+    {
+      id: '1006',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 599,
+      location: '10783'
+    },
+    {
+      id: '1007',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 500,
+      location: '10783'
+    },
+    {
+      id: '1008',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1009',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1010',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1011',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 300,
+      location: '10783'
+    },
+    {
+      id: '1012',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '1013',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 700,
       location: '10783'
     },
     {
@@ -84,7 +192,34 @@ export class BackendService {
       token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
       dateToBeInTestcenter: '17:00',
       testcenterAddress: 'Charite',
+      riskScore: 500,
+      location: '10783'
+    },
+    {
+      id: '2002',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
       riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '2003',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '2004',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 399,
       location: '10783'
     },
     {

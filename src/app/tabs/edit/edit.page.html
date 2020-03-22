@@ -12,7 +12,8 @@
 
     <ion-datetime (ngModelChange)="change(datePicker)" displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
     <ion-label>Time</ion-label>
-    <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"></ion-datetime>
+    <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
+      minuteValues="0,10,20,30,40,50"></ion-datetime>
     <!-- <ion-datetime (ionChange)="updateTime($event)" [value]="date" display-timezone="utc"></ion-datetime>
     <ion-datetime display-format="h:mm A" picker-format="h:mm A" [value]="date" (ionChange)="updateTime($event)">
     </ion-datetime> -->
@@ -22,18 +23,18 @@
   </ng-container>
 
   <ng-container *ngIf="appointment.queue === queue.Waiting">
-    <ion-input placeholder="Tracking Id"></ion-input>
-    <ion-button>
+    <ion-input [(ngModel)]="trackingId" placeholder="Tracking Id"></ion-input>
+    <ion-button (click)="submitTrackingId()">
       Submit Tracking Code
     </ion-button>
   </ng-container>
 
   <ng-container *ngIf="appointment.queue === queue.Lab">
-    <ion-button color="danger">
+    <ion-button color="danger" (click)="submitTestResult(true)">
       {{"buttons.positive" | translate}}
     </ion-button>
 
-    <ion-button color="success">
+    <ion-button color="success" (click)="submitTestResult(false)">
       {{"buttons.negative" | translate}}
     </ion-button>
   </ng-container>

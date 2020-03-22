@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment, BackendService, Queue } from 'src/app/services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
@@ -12,10 +12,12 @@ export class EditPage implements OnInit {
   public appointment: Appointment;
   public queue: typeof Queue = Queue;
   public date: string = new Date().toUTCString();
+  public trackingId: string = '';
   constructor(
     private backendService: BackendService,
     private activatedRouter: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _location: Location
   ) {}
   ngOnInit() {
     this.activatedRouter.paramMap.subscribe(params => {
@@ -28,13 +30,32 @@ export class EditPage implements OnInit {
       });
     });
   }
-  public updateTime(event: any) {
-    // this.date = event.event
-  }
   public assignTime() {
     this.backendService.updateAppointment({
       ...this.appointment,
-      dateToBeInTestcenter: this.date
+      dateToBeInTestcenter: this.date,
+      assigned: true
     });
+    this.back();
+  }
+
+  public submitTrackingId() {
+    this.backendService.updateAppointment({
+      ...this.appointment,
+      trackingId: this.trackingId
+    });
+    this.back();
+  }
+
+  public submitTestResult(result: boolean) {
+    this.backendService.updateAppointment({
+      ...this.appointment,
+      testResult: result
+    });
+    this.back();
+  }
+
+  back() {
+    this._location.back();
   }
 }

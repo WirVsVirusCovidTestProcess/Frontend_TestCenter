@@ -25,5 +25,13 @@
     <ion-button slot="end" *ngIf="p.queue == queue.Untriaged">
       Termin Buchen
     </ion-button>
+
+    <ion-button disabled slot="end" *ngIf="p.queue == queue.Waiting">
+      {{p.dateToBeInTestcenter}}
+    </ion-button>
+
+    <ion-button disabled slot="end" *ngIf="p.queue == queue.Result">
+      {{p.testResult}}
+    </ion-button>
   </ion-item>
 </ion-list>
