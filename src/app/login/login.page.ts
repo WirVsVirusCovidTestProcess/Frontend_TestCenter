@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  login() {
+  login(form: NgForm) {
     this.mockAuthService.authenticate();
     this.router.navigateByUrl('');
   }
