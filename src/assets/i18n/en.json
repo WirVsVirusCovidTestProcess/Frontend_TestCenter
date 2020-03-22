@@ -1,5 +1,26 @@
 {
     "tabs": {
-        "untriaged_queue": "Untriaged"
+        "untriaged_queue": "Untriaged",
+        "waiting_queue": "Warteliste",
+        "lab_queue": "Labor",
+        "results": "Ergebnisse",
+        "edit": {
+            "test_result": "Test Ergebnis",
+            "title": "Termin bearbeiten"
+        }
+    },
+    "buttons": {
+        "negative": "Negativ",
+        "positive": "Positiv"
+    },
+    "pages": {
+        "login": {
+            "title": "Einloggen"
+        },
+        "settings": {
+            "title": "Settings",
+            "language": "Language",
+            "locations": "Anzuzeigende Orte"
+        }
     }
 }

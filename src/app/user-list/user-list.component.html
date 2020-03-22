@@ -22,5 +22,8 @@
       <h3>PLZ {{p.Location}}</h3>
       <p>Preferred: {{p.TestcenterAddress}}</p>
     </ion-label>
+    <ion-button slot="end" *ngIf="p.queue == queue.Untriaged">
+      Termin Buchen
+    </ion-button>
   </ion-item>
 </ion-list>

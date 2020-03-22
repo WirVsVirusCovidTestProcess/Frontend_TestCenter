@@ -1,163 +1,138 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  constructor() {}
+  /**
+   * Without ending Backslash
+   */
+  public baseUrl: string = 'https://covid-testprocess.azurewebsites.net';
+  constructor(private httpClient: HttpClient) {}
 
-  getUntriagedQueue(): Observable<User[]> {
-    return of(
-      this.addAdditionalProperties([
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 100,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 600,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 100,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 100,
-          Location: '02994',
-          TestResult: true
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 400,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 100,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 700,
-          Location: '02994'
-        },
-        {
-          id: 1234,
-          assigned: false,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 100,
-          Location: '02994'
-        },
-        {
-          id: 3333,
-          assigned: true,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 400,
-          TrackingId: '453453453',
-          Location: '02994'
-        },
-        {
-          id: 2222,
-          assigned: true,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          RiskScore: 800,
-          Location: '02994'
-        },
-        {
-          id: 4445,
-          assigned: true,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          TrackingId: '453453453',
-          RiskScore: 400,
-          Location: '02994',
-          TestResult: true
-        },
-        {
-          id: 4444,
-          assigned: true,
-          DateTimeOffset: '17:00',
-          TestcenterAddress: 'Charite',
-          TrackingId: '453453453',
-          RiskScore: 400,
-          Location: '02994',
-          TestResult: false
-        }
-      ])
+  getAllNotAssignedAppointments(locations: string[]): Observable<Appointment[]> {
+    // let locationsString = "location=65510"
+    return this.baseGet<BackendAppointment[]>(`/api/GetAllNotAssigendAppointMents`).pipe(
+      map(a => this.addAdditionalPropertiesArray(a))
     );
   }
 
-  public addAdditionalProperties(user: BackendUser[]): User[] {
+  updateAppointment(updateA: Appointment): Observable<Appointment> {
+    let update = BackendService.appointments.filter(a => a.id == updateA.id)[0];
+    update = updateA;
+    return of(updateA);
+    // return this.baseGet<BackendAppointment>('/api/AddAnAppointmentDate').pipe(
+    //   map(a => this.addAdditionalProperties(a))
+    // );
+  }
+
+  baseGet<T>(path: string): Observable<T> {
+    return this.httpClient.get<T>(`${this.baseUrl}${path}`);
+  }
+
+  getAppointmentQueue(): Observable<Appointment[]> {
+    return of(this.addAdditionalPropertiesArray(BackendService.appointments));
+  }
+
+  public addAdditionalPropertiesArray(user: BackendAppointment[]): Appointment[] {
     return user.map(u => {
       return {
         ...u,
-        status: u.RiskScore < 300 ? 'green' : u.RiskScore < 600 ? 'yellow' : 'red',
+        status: u.riskScore < 300 ? 'green' : u.riskScore < 600 ? 'yellow' : 'red',
         queue: this.getQueue(u)
       };
     });
   }
 
-  private getQueue(u: BackendUser): Queue {
+  public addAdditionalProperties(u: BackendAppointment): Appointment {
+    return {
+      ...u,
+      status: u.riskScore < 300 ? 'green' : u.riskScore < 600 ? 'yellow' : 'red',
+      queue: this.getQueue(u)
+    };
+  }
+
+  private getQueue(u: BackendAppointment): Queue {
     if (u.assigned == false) {
       return Queue.Untriaged;
     }
-    if (u.TrackingId == null) {
+    if (u.trackingId == null) {
       return Queue.Waiting;
     }
-    if (u.TestResult == null) {
+    if (u.testResult == null) {
       return Queue.Lab;
     }
     return Queue.Result;
   }
+
+  public static appointments: BackendAppointment[] = [
+    {
+      id: '1001',
+      assigned: false,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '2001',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '3001',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      trackingId: '45758678',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 100,
+      location: '10783'
+    },
+    {
+      id: '4001',
+      assigned: true,
+      token: 'Q1VvLFnO10gvfNuzKMcGQ4yK5TLaEWfF',
+      trackingId: '3445668576',
+      dateToBeInTestcenter: '17:00',
+      testcenterAddress: 'Charite',
+      riskScore: 600,
+      location: '10783',
+      testResult: true
+    }
+  ];
 }
 
-export interface BackendUser {
-  id: number;
+export interface BackendAppointment {
+  /**
+   * @ignore
+   */
+  id: string;
+  token: string;
   assigned: boolean;
-  DateTimeOffset: string;
-  TestcenterAddress: string;
-  RiskScore: number;
+  dateToBeInTestcenter: string;
+  testcenterAddress: string;
+  riskScore: number;
   /**
    * this ist the PLZ
    */
-  Location: string;
-  TestResult?: boolean;
+  location: string;
+  testResult?: boolean;
   /**
    * Tracking Id for connecting the probe to an assignement
    */
-  TrackingId?: string;
+  trackingId?: string;
 }
 
-export interface User extends BackendUser {
+export interface Appointment extends BackendAppointment {
   status: 'red' | 'yellow' | 'green';
   queue: Queue;
 }

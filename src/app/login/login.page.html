@@ -1,14 +1,18 @@
-<ion-content>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{"pages.login.title" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="center">
   <form #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
       <ion-row>
         <ion-col align-self-center>
-          <div text-center>
-            <h3>Login</h3>
-          </div>
           <div>
             <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required style="width: 400px">
+              </ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>

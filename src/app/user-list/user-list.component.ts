@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../services/backend.service';
+import { Appointment, Queue } from '../services/backend.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  public queue: typeof Queue = Queue;
   @Input()
-  public people: User[] = [];
+  public people: Appointment[] = [];
 
   constructor(private router: Router) {}
 
   ngOnInit() {}
-  public buttonClick(person: User) {
+  public buttonClick(person: Appointment) {
     this.router.navigateByUrl(`tabs/edit/${person.id}`);
   }
 }

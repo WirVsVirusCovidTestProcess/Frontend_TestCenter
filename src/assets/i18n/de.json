@@ -12,5 +12,15 @@
     "buttons": {
         "negative": "Negativ",
         "positive": "Positiv"
+    },
+    "pages": {
+        "login": {
+            "title": "Einloggen"
+        },
+        "settings": {
+            "title": "Einstellungen",
+            "language": "Sprache",
+            "locations": "Anzuzeigende Orte"
+        }
     }
 }

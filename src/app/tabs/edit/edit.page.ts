@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, BackendService, Queue } from 'src/app/services/backend.service';
+import { Appointment, BackendService, Queue } from 'src/app/services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -9,8 +9,9 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./edit.page.scss']
 })
 export class EditPage implements OnInit {
-  public appointment: User;
+  public appointment: Appointment;
   public queue: typeof Queue = Queue;
+  public date: string = new Date().toUTCString();
   constructor(
     private backendService: BackendService,
     private activatedRouter: ActivatedRoute,
@@ -22,9 +23,18 @@ export class EditPage implements OnInit {
       if (id == null) {
         this.router.navigateByUrl('tabs');
       }
-      this.backendService.getUntriagedQueue().subscribe(p => {
+      this.backendService.getAppointmentQueue().subscribe(p => {
         this.appointment = p.filter(u => u.id.toString() === id)[0];
       });
+    });
+  }
+  public updateTime(event: any) {
+    // this.date = event.event
+  }
+  public assignTime() {
+    this.backendService.updateAppointment({
+      ...this.appointment,
+      dateToBeInTestcenter: this.date
     });
   }
 }

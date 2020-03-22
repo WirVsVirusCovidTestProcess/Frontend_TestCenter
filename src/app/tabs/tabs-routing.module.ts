@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
       },
       {
+        path: 'settings',
+        loadChildren: () => import('../pages/settings/settings.module').then(m => m.SettingsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/untriaged-queue',
         pathMatch: 'full'

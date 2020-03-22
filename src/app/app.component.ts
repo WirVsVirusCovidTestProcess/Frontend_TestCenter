@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  public static defaultLanguage: string = 'de';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,8 +25,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.translateService.setDefaultLang('en');
-      this.translateService.use('de');
+      this.translateService.setDefaultLang(AppComponent.defaultLanguage);
+      this.translateService.use(AppComponent.defaultLanguage);
     });
   }
 }
