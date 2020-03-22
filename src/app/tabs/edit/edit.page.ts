@@ -13,6 +13,7 @@ export class EditPage implements OnInit {
   public queue: typeof Queue = Queue;
   public date: string = new Date().toUTCString();
   public trackingId: string = '';
+  public showScanner: boolean = false;
   constructor(
     private backendService: BackendService,
     private activatedRouter: ActivatedRoute,
@@ -57,5 +58,14 @@ export class EditPage implements OnInit {
 
   back() {
     this.location.back();
+  }
+
+  scanned(str: any) {
+    this.trackingId = str;
+    this.toggleScanner();
+  }
+
+  toggleScanner() {
+    this.showScanner = !this.showScanner;
   }
 }

@@ -15,7 +15,6 @@
           <h2>{{appointment.id}}</h2>
         </ion-card-header>
         <ion-card-content>
-
           <ng-container *ngIf="appointment.queue === queue.Untriaged">
             <ion-label>{{"tabs.edit.date" | translate}}</ion-label>
             <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
@@ -32,6 +31,15 @@
 
           <ng-container *ngIf="appointment.queue === queue.Waiting">
             <ion-input [(ngModel)]="trackingId" placeholder="Tracking Id"></ion-input>
+            <app-barcode-scanner style="height:100%;" (codeScanned)="scanned($event)" *ngIf="showScanner">
+            </app-barcode-scanner>
+            <app-user-list [people]="people" *ngIf="!showScanner"></app-user-list>
+
+            <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+              <ion-fab-button (click)="toggleScanner()">
+                <ion-icon name="barcode-outline"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
             <ion-button (click)="submitTrackingId()">
               Submit Tracking Code
             </ion-button>

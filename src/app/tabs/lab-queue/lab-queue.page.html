@@ -12,5 +12,13 @@
       <ion-title size="large">{{"tabs.lab_queue" | translate}}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <app-user-list [people]="people"></app-user-list>
+
+  <app-barcode-scanner style="height:100%;" (codeScanned)="scanned($event)" *ngIf="showScanner"></app-barcode-scanner>
+  <app-user-list [people]="people" *ngIf="!showScanner"></app-user-list>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="toggleScanner()">
+      <ion-icon name="barcode-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

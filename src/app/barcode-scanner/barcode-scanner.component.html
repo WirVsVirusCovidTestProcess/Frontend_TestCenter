@@ -1,0 +1,11 @@
+<zxing-scanner style="display: flex; height:100%;" [class.not-displayed]="cameraStatus.cameraFound != status" #scanner
+    (scanSuccess)="scannedCode($event)" [formats]="formatsEnabled"></zxing-scanner>
+<div class="text-center outline" *ngIf="cameraStatus.cameraFound != status">
+    <p>
+        <i class="fa fa-camera fa-5x" aria-hidden="true"></i>
+    </p>
+    <p *ngIf="cameraStatus.initialize === status">Bitte gib die Kamera frei, um den QR-Code zu scannen.</p>
+    <p *ngIf="cameraStatus.cameraBlocked === status">Die Kamera Funktion wurde blockiert, du kannst sie in den Browser
+        Einstellungen wieder freigeben.</p>
+    <p *ngIf="cameraStatus.noCameraFound === status">Keine Kamera gefunden.</p>
+</div>
