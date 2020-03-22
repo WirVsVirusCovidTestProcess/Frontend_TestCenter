@@ -37,12 +37,16 @@
       Termin vergeben
     </ion-button>
 
-    <ion-button disabled slot="end" *ngIf="p.queue == queue.Waiting">
-      {{p.dateToBeInTestcenter}}
-    </ion-button>
+    <ion-card slot="end" *ngIf="p.queue == queue.Waiting" color="success">
+      <ion-card-content>
+        {{p.dateToBeInTestcenter}}
+      </ion-card-content>
+    </ion-card>
 
-    <ion-button disabled slot="end" *ngIf="p.queue == queue.Result" [color]="p.result ? 'danger' : 'success'">
-      {{p.testResult ? "POSTIV" : "NEGATIV" }}
-    </ion-button>
+    <ion-card slot="end" *ngIf="p.queue == queue.Result" [color]="p.testResult ? 'danger' : 'success'">
+      <ion-card-content>
+          {{p.testResult ? "POSITIV" : "NEGATIV" }}
+      </ion-card-content>
+    </ion-card>
   </ion-item>
 </ion-list>
