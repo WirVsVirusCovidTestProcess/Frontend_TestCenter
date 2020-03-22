@@ -12,40 +12,50 @@
     <ion-col size-md="6" offset-md="3">
       <ion-card>
         <ion-card-header>
-          <h2>{{appointment.id}}</h2>
+          <h2>Termin: {{appointment.id}}</h2>
         </ion-card-header>
         <ion-card-content>
           <ng-container *ngIf="appointment.queue === queue.Untriaged">
-            <ion-label>{{"tabs.edit.date" | translate}}</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
-            <ion-label>{{"tabs.edit.time" | translate}}</ion-label>
-            <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
-              minuteValues="0,10,20,30,40,50"></ion-datetime>
-            <!-- <ion-datetime (ionChange)="updateTime($event)" [value]="date" display-timezone="utc"></ion-datetime>
-            <ion-datetime display-format="h:mm A" picker-format="h:mm A" [value]="date" (ionChange)="updateTime($event)">
-            </ion-datetime> -->
-            <ion-button (click)="assignTime()">
+            <p>Vergeben Sie ein Datum und eine Zeit, zu der der Patient im Test-Zentrum erscheinen soll. </p>
+            <ion-item>
+              <ion-label>{{"tabs.edit.date" | translate}}</ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{"tabs.edit.time" | translate}}</ion-label>
+              <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
+                minuteValues="0,10,20,30,40,50"></ion-datetime>
+            </ion-item>
+            <ion-button (click)="assignTime()" expand="block">
               Zeit zuweisen
             </ion-button>
           </ng-container>
 
           <ng-container *ngIf="appointment.queue === queue.Waiting">
-            <ion-input [(ngModel)]="trackingId" placeholder="Tracking Id"></ion-input>
+            <p>Geben oder Scannen sie den Barcode der Probe um den Patienten später einfach über das Ergebnis zu
+              informieren.</p>
+            <ion-item>
+              <ion-label>
+                Proben ID
+              </ion-label>
+              <ion-input [(ngModel)]="trackingId" placeholder="034324034"></ion-input>
+            </ion-item>
             <app-barcode-scanner style="height:100%;" (codeScanned)="scanned($event)" *ngIf="showScanner">
             </app-barcode-scanner>
-            <app-user-list [people]="people" *ngIf="!showScanner"></app-user-list>
 
             <ion-fab horizontal="end" vertical="bottom" slot="fixed">
               <ion-fab-button (click)="toggleScanner()">
                 <ion-icon name="barcode-outline"></ion-icon>
               </ion-fab-button>
             </ion-fab>
-            <ion-button (click)="submitTrackingId()">
-              Submit Tracking Code
+            <ion-button (click)="submitTrackingId()" expand="block">
+              Tracking Code (der Probe)
             </ion-button>
           </ng-container>
 
           <ng-container *ngIf="appointment.queue === queue.Lab">
+            <p>Erfassen Sie das Ergebnis des Tests, um Gesundheitsamt, den Patienten und das Krankenhaus zu informieren.
+            </p>
             <ion-button color="danger" (click)="submitTestResult(true)">
               {{"buttons.positive" | translate}}
             </ion-button>

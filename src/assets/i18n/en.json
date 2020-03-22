@@ -1,9 +1,9 @@
 {
     "tabs": {
         "untriaged_queue": "Untriaged",
-        "waiting_queue": "Warteliste",
+        "waiting_queue": "Waiting List",
         "lab_queue": "Labor",
-        "results": "Ergebnisse",
+        "results": "Results",
         "edit": {
             "test_result": "Test Ergebnis",
             "title": "Termin bearbeiten",
@@ -22,7 +22,7 @@
         "settings": {
             "title": "Settings",
             "language": "Language",
-            "locations": "Anzuzeigende Orte"
+            "locations": "Filtered Locations"
         }
     }
 }

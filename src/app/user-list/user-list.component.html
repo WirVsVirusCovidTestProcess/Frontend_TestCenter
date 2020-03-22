@@ -3,6 +3,35 @@
     Recent Conversations
   </ion-list-header> -->
 
+  <ion-list-header>
+    <ion-avatar slot="start">
+    </ion-avatar>
+    <ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Stufe
+          </ion-col>
+          <ion-col>
+            Patient
+          </ion-col>
+          <ion-col>
+            PLZ
+          </ion-col>
+          <ion-col>
+            Wunsch
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+          <ion-col>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-label>
+  </ion-list-header>
+
   <ion-item *ngFor="let p of people" button (click)="buttonClick(p)">
     <ion-avatar slot="start">
       <ng-container [ngSwitch]="p.status">
@@ -28,7 +57,7 @@
             <h3>{{p.location}}</h3>
           </ion-col>
           <ion-col>
-            <p>Preferred: {{p.testcenterAddress}}</p>
+            <p>{{p.testcenterAddress}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -43,9 +72,15 @@
       </ion-card-content>
     </ion-card>
 
+    <ion-card slot="end" *ngIf="p.queue == queue.Lab" color="success">
+      <ion-card-content>
+        Erfassen
+      </ion-card-content>
+    </ion-card>
+
     <ion-card slot="end" *ngIf="p.queue == queue.Result" [color]="p.testResult ? 'danger' : 'success'">
       <ion-card-content>
-          {{p.testResult ? "POSITIV" : "NEGATIV" }}
+        {{p.testResult ? "POSITIV" : "NEGATIV" }}
       </ion-card-content>
     </ion-card>
   </ion-item>
