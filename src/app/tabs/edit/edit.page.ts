@@ -14,10 +14,10 @@ export class EditPage implements OnInit {
   public date: string = new Date().toUTCString();
   public trackingId: string = '';
   constructor(
-      private backendService: BackendService,
-      private activatedRouter: ActivatedRoute,
-      private router: Router,
-      private _location: Location
+    private backendService: BackendService,
+    private activatedRouter: ActivatedRoute,
+    private router: Router,
+    private location: Location
   ) {}
   ngOnInit() {
     this.activatedRouter.paramMap.subscribe(params => {
