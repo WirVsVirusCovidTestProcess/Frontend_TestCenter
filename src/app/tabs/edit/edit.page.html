@@ -18,11 +18,10 @@
 
           <ng-container *ngIf="appointment.queue === queue.Untriaged">
             <ion-label>{{"tabs.edit.date" | translate}}</ion-label>
-            <ion-datetime (ngModelChange)="change(datePicker)" displayFormat="MM/DD/YYYY"
-                          [(ngModel)]="date"></ion-datetime>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
             <ion-label>{{"tabs.edit.time" | translate}}</ion-label>
             <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
-                          minuteValues="0,10,20,30,40,50"></ion-datetime>
+              minuteValues="0,10,20,30,40,50"></ion-datetime>
             <!-- <ion-datetime (ionChange)="updateTime($event)" [value]="date" display-timezone="utc"></ion-datetime>
             <ion-datetime display-format="h:mm A" picker-format="h:mm A" [value]="date" (ionChange)="updateTime($event)">
             </ion-datetime> -->
@@ -50,7 +49,8 @@
 
           <ng-container *ngIf="appointment.queue === queue.Result" class="alignment">
             {{"tabs.edit.test_result" | translate }}:
-            <ion-card [color]="appointment.testResult ? 'danger' : 'success'" size="large" expand="block" class="result" >
+            <ion-card [color]="appointment.testResult ? 'danger' : 'success'" size="large" expand="block"
+              class="result">
               <ion-card-header>
                 <ion-card-title>
                   {{ (appointment.testResult ? "buttons.positive" : "buttons.negative") | translate}}
