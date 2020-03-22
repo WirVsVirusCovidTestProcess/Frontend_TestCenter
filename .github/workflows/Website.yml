@@ -31,6 +31,11 @@ jobs:
       run: npm install -g @ionic/cli
     - name: Build
       run: ionic build --prod
+    - name: Copy web.config
+      uses: canastro/copy-file-action@master
+      with:
+        source: "web.config"
+        target: "www/web.config"
     - name: Upload Website
       uses: actions/upload-artifact@v1
       with:
