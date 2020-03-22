@@ -12,21 +12,22 @@ export class EditPage implements OnInit {
   public appointment: Appointment;
   public queue: typeof Queue = Queue;
   public date: string = new Date().toUTCString();
-  public trackingId: string = '';
+  public trackingId = '';
   constructor(
     private backendService: BackendService,
     private activatedRouter: ActivatedRoute,
     private router: Router,
-    private _location: Location
+    private location: Location
   ) {}
   ngOnInit() {
     this.activatedRouter.paramMap.subscribe(params => {
-      let id = params.get('id');
+      const id = params.get('id');
       if (id == null) {
         this.router.navigateByUrl('tabs');
       }
       this.backendService.getAppointmentQueue().subscribe(p => {
         this.appointment = p.filter(u => u.id.toString() === id)[0];
+        console.log(this.appointment);
       });
     });
   }

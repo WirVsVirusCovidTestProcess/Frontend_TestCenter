@@ -6,7 +6,9 @@
         "results": "Ergebnisse",
         "edit": {
             "test_result": "Test Ergebnis",
-            "title": "Termin bearbeiten"
+            "title": "Termin bearbeiten",
+            "time": "Uhrzeit",
+            "date": "Datum"
         }
     },
     "buttons": {

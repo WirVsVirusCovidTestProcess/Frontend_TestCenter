@@ -1,45 +1,65 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title> {{"tabs.edit.title" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2>{{appointment.id}}</h2>
-  <p></p>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-card>
+        <ion-card-header>
+          <h2>{{appointment.id}}</h2>
+        </ion-card-header>
+        <ion-card-content>
 
-  <ng-container *ngIf="appointment.queue === queue.Untriaged">
+          <ng-container *ngIf="appointment.queue === queue.Untriaged">
+            <ion-label>{{"tabs.edit.date" | translate}}</ion-label>
+            <ion-datetime (ngModelChange)="change(datePicker)" displayFormat="MM/DD/YYYY"
+                          [(ngModel)]="date"></ion-datetime>
+            <ion-label>{{"tabs.edit.time" | translate}}</ion-label>
+            <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
+                          minuteValues="0,10,20,30,40,50"></ion-datetime>
+            <!-- <ion-datetime (ionChange)="updateTime($event)" [value]="date" display-timezone="utc"></ion-datetime>
+            <ion-datetime display-format="h:mm A" picker-format="h:mm A" [value]="date" (ionChange)="updateTime($event)">
+            </ion-datetime> -->
+            <ion-button (click)="assignTime()">
+              Zeit zuweisen
+            </ion-button>
+          </ng-container>
 
-    <ion-datetime (ngModelChange)="change(datePicker)" displayFormat="MM/DD/YYYY" [(ngModel)]="date"></ion-datetime>
-    <ion-label>Time</ion-label>
-    <ion-datetime #datePicker (ionCancel)="date=undefined" displayFormat="HH:mm" [(ngModel)]="date"
-      minuteValues="0,10,20,30,40,50"></ion-datetime>
-    <!-- <ion-datetime (ionChange)="updateTime($event)" [value]="date" display-timezone="utc"></ion-datetime>
-    <ion-datetime display-format="h:mm A" picker-format="h:mm A" [value]="date" (ionChange)="updateTime($event)">
-    </ion-datetime> -->
-    <ion-button (click)="assignTime()">
-      Zeit zuweisen
-    </ion-button>
-  </ng-container>
+          <ng-container *ngIf="appointment.queue === queue.Waiting">
+            <ion-input [(ngModel)]="trackingId" placeholder="Tracking Id"></ion-input>
+            <ion-button (click)="submitTrackingId()">
+              Submit Tracking Code
+            </ion-button>
+          </ng-container>
 
-  <ng-container *ngIf="appointment.queue === queue.Waiting">
-    <ion-input [(ngModel)]="trackingId" placeholder="Tracking Id"></ion-input>
-    <ion-button (click)="submitTrackingId()">
-      Submit Tracking Code
-    </ion-button>
-  </ng-container>
+          <ng-container *ngIf="appointment.queue === queue.Lab">
+            <ion-button color="danger" (click)="submitTestResult(true)">
+              {{"buttons.positive" | translate}}
+            </ion-button>
 
-  <ng-container *ngIf="appointment.queue === queue.Lab">
-    <ion-button color="danger" (click)="submitTestResult(true)">
-      {{"buttons.positive" | translate}}
-    </ion-button>
+            <ion-button color="success" (click)="submitTestResult(false)">
+              {{"buttons.negative" | translate}}
+            </ion-button>
+          </ng-container>
 
-    <ion-button color="success" (click)="submitTestResult(false)">
-      {{"buttons.negative" | translate}}
-    </ion-button>
-  </ng-container>
-
-  <ng-container *ngIf="appointment.queue === queue.Result">
-    {{"tabs.edit.test_result" | translate }}: {{appointment.TestResult}}
-  </ng-container>
+          <ng-container *ngIf="appointment.queue === queue.Result" class="alignment">
+            {{"tabs.edit.test_result" | translate }}:
+            <ion-card [color]="appointment.testResult ? 'danger' : 'success'" size="large" expand="block" class="result" >
+              <ion-card-header>
+                <ion-card-title>
+                  {{ (appointment.testResult ? "buttons.positive" : "buttons.negative") | translate}}
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ng-container>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 </ion-content>
