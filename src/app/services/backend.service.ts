@@ -10,7 +10,7 @@ export class BackendService {
   /**
    * Without ending Backslash
    */
-  public baseUrl: string = 'https://covid-testprocess.azurewebsites.net';
+  public baseUrl: string = 'https://covid-functionapp.azurewebsites.net';
   constructor(private httpClient: HttpClient) {}
 
   getAllNotAssignedAppointments(locations: string[]): Observable<Appointment[]> {
